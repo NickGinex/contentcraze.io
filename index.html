@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<!-- 
+*************************************************************
+CONTENTCRAZE COMING SOON PAGE - SVG REPLACEMENT INSTRUCTIONS
+*************************************************************
+
+HOW TO REPLACE SVGs WITH YOUR OWN:
+1. Upload your own SVG files to your web hosting
+2. Search for "REPLACE WITH YOUR" in this file to find the places to change
+3. Update the src attributes with your own file names
+4. Your SVG files should have these approximate dimensions:
+   - Main logo: square-ish, around 200x200px viewBox
+   - Play button: rectangular, around 80x30px viewBox
+5. No other changes needed - all animations will work with your new SVGs!
+
+*************************************************************
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContentCraze - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #0a0a1a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+            text-align: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards 0.5s;
+        }
+
+        .logo-container {
+            margin-bottom: 4rem;
+            position: relative;
+            display: inline-block;
+            perspective: 1000px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 2rem;
+            background: rgba(10, 10, 26, 0.8);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            position: relative;
+            outline: none;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            transform-style: preserve-3d;
+            animation: logoEntrance 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            z-index: -1;
+            border-radius: 40px;
+            background: linear-gradient(to right, #a5ffd6, #45c6ff);
+            animation: borderGlow 4s ease-in-out infinite alternate;
+        }
+
+        /* CUSTOMIZE YOUR SVG STYLING HERE */
+        .logo-image {
+            max-width: 80%;  /* You can adjust this to change the size of your main logo */
+            max-height: 80%; /* You can adjust this to change the size of your main logo */
+            object-fit: contain;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+        
+        .play-button-container {
+            margin-top: -30px; /* Adjust this to change the overlap with the main logo */
+            margin-bottom: 30px;
+            z-index: 10;
+            position: relative;
+            transform: translateY(15px);
+            animation: floatButton 3s ease-in-out infinite alternate;
+        }
+        
+        .play-button-image {
+            width: 80px; /* Adjust this to change the size of your play button */
+            height: auto;
+            filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.5));
+            transition: all 0.3s ease;
+        }
+        
+        .play-button-image:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.6));
+        }
+        
+        @keyframes floatButton {
+            0% {
+                transform: translateY(15px);
+            }
+            100% {
+                transform: translateY(20px);
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, #a5ffd6, #45c6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease-out forwards 0.7s, gradientShift 8s ease-in-out infinite;
+        }
+
+        .coming-soon {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            background: linear-gradient(to right, #a5ffd6, #45c6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards 1s, gradientShift 8s ease-in-out infinite 1s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .coming-soon::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0a0a1a;
+            border-left: 4px solid #45c6ff;
+            animation: typing 2.5s steps(12) 1.5s forwards;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease-out forwards 1.3s;
+        }
+
+        .subscribe {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 4rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease-out forwards 1.6s;
+        }
+
+        input[type="email"] {
+            padding: 15px 20px;
+            width: 100%;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            outline: none;
+            background-color: #1a1a2e;
+            color: white;
+            border-left: 1px solid #45c6ff;
+            border-top: 1px solid #45c6ff;
+            border-bottom: 1px solid #45c6ff;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="email"]:focus {
+            box-shadow: 0 0 15px rgba(69, 198, 255, 0.5);
+        }
+
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            background: linear-gradient(to right, #a5ffd6, #45c6ff);
+            color: #0a0a1a;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: pulseButton 2s infinite alternate 2s;
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            animation: buttonShine 3s ease-in-out infinite;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(69, 198, 255, 0.3);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease-out forwards 1.9s;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to bottom right, #a5ffd6, #45c6ff);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 10px 20px rgba(69, 198, 255, 0.3);
+        }
+        
+        .social-icon:nth-child(1) {
+            animation-delay: 2s;
+        }
+        
+        .social-icon:nth-child(2) {
+            animation-delay: 2.1s;
+        }
+        
+        .social-icon:nth-child(3) {
+            animation-delay: 2.2s;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(to bottom right, #a5ffd6, #45c6ff);
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 15s infinite linear, fadeParticle 1s ease-in forwards;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards 2.2s;
+        }
+        
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: loaderFadeOut 0.8s ease-out forwards 2.5s;
+        }
+        
+        .loader {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            animation: loaderRotate 2s linear infinite;
+        }
+        
+        .loader::before, .loader::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+        }
+        
+        .loader::before {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to right, #a5ffd6, #45c6ff);
+            animation: loaderSpin 2s linear infinite;
+        }
+        
+        .loader::after {
+            width: 85%;
+            height: 85%;
+            background-color: #0a0a1a;
+            top: 7.5%;
+            left: 7.5%;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-1000px) translateX(100px) rotate(360deg);
+            }
+        }
+        
+        @keyframes fadeParticle {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0.2;
+            }
+        }
+        
+        @keyframes typing {
+            from {
+                width: 100%;
+            }
+            to {
+                width: 0;
+            }
+        }
+        
+        @keyframes pulseButton {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 rgba(69, 198, 255, 0.4);
+            }
+            100% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(69, 198, 255, 0.7);
+            }
+        }
+        
+        @keyframes buttonShine {
+            0% {
+                left: -50%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            20% {
+                left: 120%;
+                opacity: 0;
+            }
+            100% {
+                left: 120%;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes logoEntrance {
+            0% {
+                opacity: 0;
+                transform: rotateY(-90deg) translateZ(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: rotateY(0) translateZ(0);
+            }
+        }
+        
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0 0 5px rgba(69, 198, 255, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(69, 198, 255, 0.8), 0 0 40px rgba(165, 255, 214, 0.4);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes loaderRotate {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes loaderSpin {
+            0% {
+                clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+            }
+            25% {
+                clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+            }
+            50% {
+                clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+            }
+            75% {
+                clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+            }
+            100% {
+                clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+            }
+        }
+        
+        @keyframes loaderFadeOut {
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .coming-soon {
+                font-size: 1.8rem;
+            }
+            
+            .description {
+                font-size: 1rem;
+            }
+            
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .subscribe {
+                flex-direction: column;
+            }
+            
+            input[type="email"] {
+                border-radius: 50px;
+                margin-bottom: 1rem;
+                border: 1px solid #45c6ff;
+            }
+            
+            button {
+                border-radius: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background Particles -->
+    <div class="particles">
+        <!-- Particles will be created with JS -->
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <!-- REPLACE WITH YOUR MAIN LOGO SVG: Update the src attribute with your own SVG file -->
+                <img src="YOUR-MAIN-LOGO.svg" alt="ContentCraze Logo" class="logo-image" />
+            </div>
+            <!-- Play button below the main logo -->
+            <div class="play-button-container">
+                <!-- REPLACE WITH YOUR PLAY BUTTON SVG: Update the src attribute with your own SVG file -->
+                <img src="YOUR-PLAY-BUTTON.svg" alt="Play Button" class="play-button-image" />
+            </div>
+        </div>
+        
+        <h1>ContentCraze</h1>
+        <div class="coming-soon">Coming Soon</div>
+        
+        <p class="description">
+            Get ready for a revolutionary way to create, share, and monetize your content. 
+            Join our waitlist to be the first to know when we launch!
+        </p>
+        
+        <div class="subscribe">
+            <input type="email" placeholder="Enter your email address">
+            <button>Notify Me</button>
+        </div>
+        
+        <div class="social-icons">
+            <div class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 16.84 5.44 20.87 10 21.8V15H8V12H10V9.5C10 7.57 11.57 6 13.5 6H16V9H14C13.45 9 13 9.45 13 10V12H16V15H13V21.95C18.05 21.45 22 17.19 22 12Z" fill="#0a0a1a"/>
+                </svg>
+            </div>
+            <div class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.46 6C21.69 6.35 20.86 6.58 20 6.69C20.88 6.16 21.56 5.32 21.88 4.31C21.05 4.81 20.13 5.16 19.16 5.36C18.37 4.5 17.26 4 16 4C13.65 4 11.73 5.92 11.73 8.29C11.73 8.63 11.77 8.96 11.84 9.27C8.28 9.09 5.11 7.38 3 4.79C2.63 5.42 2.42 6.16 2.42 6.94C2.42 8.43 3.17 9.75 4.33 10.5C3.62 10.5 2.96 10.3 2.38 10V10.03C2.38 12.11 3.86 13.85 5.82 14.24C5.46 14.34 5.08 14.39 4.69 14.39C4.42 14.39 4.15 14.36 3.89 14.31C4.43 16 6 17.26 7.89 17.29C6.43 18.45 4.58 19.13 2.56 19.13C2.22 19.13 1.88 19.11 1.54 19.07C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79C20.33 8.6 20.33 8.42 20.32 8.23C21.16 7.63 21.88 6.87 22.46 6Z" fill="#0a0a1a"/>
+                </svg>
+            </div>
+            <div class="social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C14.717 2 15.056 2.01 16.122 2.06C17.187 2.11 17.912 2.277 18.55 2.525C19.21 2.779 19.766 3.123 20.322 3.678C20.8305 4.1779 21.224 4.78259 21.475 5.45C21.722 6.087 21.89 6.813 21.94 7.878C21.987 8.944 22 9.283 22 12C22 14.717 21.99 15.056 21.94 16.122C21.89 17.187 21.722 17.912 21.475 18.55C21.2247 19.2178 20.8311 19.8226 20.322 20.322C19.822 20.8303 19.2173 21.2238 18.55 21.475C17.913 21.722 17.187 21.89 16.122 21.94C15.056 21.987 14.717 22 12 22C9.283 22 8.944 21.99 7.878 21.94C6.813 21.89 6.088 21.722 5.45 21.475C4.78233 21.2245 4.17753 20.8309 3.678 20.322C3.16941 19.8222 2.77593 19.2175 2.525 18.55C2.277 17.913 2.11 17.187 2.06 16.122C2.013 15.056 2 14.717 2 12C2 9.283 2.01 8.944 2.06 7.878C2.11 6.812 2.277 6.088 2.525 5.45C2.77524 4.78218 3.1688 4.17732 3.678 3.678C4.17767 3.16923 4.7824 2.77573 5.45 2.525C6.088 2.277 6.812 2.11 7.878 2.06C8.944 2.013 9.283 2 12 2ZM12 7C10.6739 7 9.40215 7.52678 8.46447 8.46447C7.52678 9.40215 7 10.6739 7 12C7 13.3261 7.52678 14.5979 8.46447 15.5355C9.40215 16.4732 10.6739 17 12 17C13.3261 17 14.5979 16.4732 15.5355 15.5355C16.4732 14.5979 17 13.3261 17 12C17 10.6739 16.4732 9.40215 15.5355 8.46447C14.5979 7.52678 13.3261 7 12 7ZM18.5 6.75C18.5 6.41848 18.3683 6.10054 18.1339 5.86612C17.8995 5.6317 17.5815 5.5 17.25 5.5C16.9185 5.5 16.6005 5.6317 16.3661 5.86612C16.1317 6.10054 16 6.41848 16 6.75C16 7.08152 16.1317 7.39946 16.3661 7.63388C16.6005 7.8683 16.9185 8 17.25 8C17.5815 8 17.8995 7.8683 18.1339 7.63388C18.3683 7.39946 18.5 7.08152 18.5 6.75ZM12 9C12.7956 9 13.5587 9.31607 14.1213 9.87868C14.6839 10.4413 15 11.2044 15 12C15 12.7956 14.6839 13.5587 14.1213 14.1213C13.5587 14.6839 12.7956 15 12 15C11.2044 15 10.4413 14.6839 9.87868 14.1213C9.31607 13.5587 9 12.7956 9 12C9 11.2044 9.31607 10.4413 9.87868 9.87868C10.4413 9.31607 11.2044 9 12 9Z" fill="#0a0a1a"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 ContentCraze. All rights reserved.
+    </footer>
+    
+    <script>
+        // Wait for page to load
+        window.addEventListener('load', () => {
+            // Create floating particles with random delays
+            const particles = document.querySelector('.particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const size = Math.random() * 15 + 5;
+                const delay = Math.random() * 5;
+                const duration = 15 + Math.random() * 20;
+                
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particles.appendChild(particle);
+            }
+            
+            // Parallax effect for particles
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                const allParticles = document.querySelectorAll('.particle');
+                allParticles.forEach((particle, index) => {
+                    const depth = 0.05 + (index % 3) * 0.01;
+                    const moveX = (mouseX - 0.5) * depth * 100;
+                    const moveY = (mouseY - 0.5) * depth * 100;
+                    
+                    particle.style.transform = `translate(${moveX}px, ${moveY}px) translateY(var(--ty, 0)) translateX(var(--tx, 0)) rotate(var(--r, 0deg))`;
+                });
+            });
+            
+            // Interactive hover animations for elements
+            const logoContainer = document.querySelector('.logo-container');
+            
+            logoContainer.addEventListener('mouseenter', () => {
+                logoContainer.style.animation = 'pulse 1s ease-in-out infinite alternate';
+            });
+            
+            logoContainer.addEventListener('mouseleave', () => {
+                logoContainer.style.animation = '';
+            });
+            
+            // Dynamic glare effect on button hover
+            const button = document.querySelector('button');
+            
+            button.addEventListener('mousemove', (e) => {
+                const x = e.offsetX;
+                const y = e.offsetY;
+                const rotateY = ((x / button.offsetWidth) * 20) - 10;
+                const rotateX = ((y / button.offsetHeight) * 20) - 10;
+                
+                button.style.transform = `perspective(500px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'perspective(500px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
